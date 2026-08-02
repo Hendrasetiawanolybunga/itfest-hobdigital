@@ -680,6 +680,14 @@ select {
   color: var(--color-text);
   box-shadow: var(--shadow-md);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tentang-badge-float i {
+  color: var(--color-accent-dark);
+  font-size: 1.1em;
 }
 
 .tentang-badge-1 {

@@ -385,7 +385,7 @@ function showSuccessMessage() {
     whiteSpace:    'nowrap',
   });
 
-  toast.innerHTML = '&#10003;&nbsp; Pesan berhasil dikirim! Kami akan segera menghubungi Anda.';
+  toast.innerHTML = '<i class="fa-solid fa-circle-check" style="margin-right: 8px;"></i> Pesan berhasil dikirim! Kami akan segera menghubungi Anda.';
   document.body.appendChild(toast);
 
   requestAnimationFrame(() => {
