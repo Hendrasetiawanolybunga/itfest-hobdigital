@@ -70,9 +70,10 @@ function initSmoothScroll() {
   });
 }
 
-// 4. HAMBURGER MENU MOBILE TOGGLE
+// 4. HAMBURGER MENU & SIDE DRAWER
 const hamburgerBtn = document.getElementById('hamburger-btn');
 const navLinks     = document.getElementById('nav-links');
+const mobileOverlay = document.getElementById('mobile-overlay');
 
 function initHamburgerMenu() {
   if (!hamburgerBtn || !navLinks) return;
@@ -82,22 +83,18 @@ function initHamburgerMenu() {
     toggleMobileMenu(!isOpen);
   });
 
-  document.addEventListener('click', (e) => {
-    const isMenuOpen = hamburgerBtn.getAttribute('aria-expanded') === 'true';
-    if (!isMenuOpen) return;
+  // Tutup menu saat klik overlay gelap
+  if(mobileOverlay) {
+    mobileOverlay.addEventListener('click', closeMobileMenu);
+  }
 
-    const clickedInsideNav = navLinks.contains(e.target);
-    const clickedHamburger = hamburgerBtn.contains(e.target);
-
-    if (!clickedInsideNav && !clickedHamburger) {
-      closeMobileMenu();
-    }
+  // Tutup saat klik link menu
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeMobileMenu();
-    }
+    if (e.key === 'Escape') closeMobileMenu();
   });
 }
 
@@ -106,6 +103,11 @@ function toggleMobileMenu(open) {
   hamburgerBtn.setAttribute('aria-expanded', String(open));
   hamburgerBtn.classList.toggle('is-open', open);
   navLinks.classList.toggle('is-open', open);
+  
+  if(mobileOverlay) {
+    mobileOverlay.classList.toggle('is-active', open);
+  }
+  
   document.body.style.overflow = open ? 'hidden' : '';
 }
 
