@@ -333,18 +333,29 @@ function initContactForm() {
       return;
     }
 
+  
     const btnText = submitBtn.querySelector('.btn-text');
-    const originalText = btnText ? btnText.textContent : 'Kirim Pesan';
+    const originalText = btnText ? btnText.textContent : 'Kirim via WhatsApp';
 
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.7';
-    if (btnText) btnText.textContent = 'Mengirim...';
+    if (btnText) btnText.textContent = 'Mengarahkan...';
 
-    await delay(1500);
+    const waNumber = "6285729515776";
+    const waMessage = `Halo HOB Digital, saya ingin berkolaborasi.\n\n*Nama:* ${namaInput.value.trim()}\n*Email:* ${emailInput.value.trim()}\n*Pesan:* ${pesanInput.value.trim()}`;
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
+
+    
+    await delay(800);
+
+   
+    window.open(waUrl, '_blank');
+
 
     submitBtn.disabled = false;
     submitBtn.style.opacity = '1';
     if (btnText) btnText.textContent = originalText;
+
 
     showSuccessMessage();
     form.reset();
